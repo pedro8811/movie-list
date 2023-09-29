@@ -1,17 +1,9 @@
 import styled from "styled-components"
 import Navbar from "../components/Navbar"
-import {
-  BsGraphUp,
-  BsWallet2,
-  BsHourglassSplit,
-  BsFillFileEarmarkTextFill,
-  BsClock,
-  BsPersonHeart
-} from 'react-icons/bs'
+import { BsPersonHeart } from 'react-icons/bs'
 import { AiOutlineClockCircle, AiFillStar } from 'react-icons/ai'
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
-import MovieCard from '../components/MovieCard'
 import { Tooltip } from "@mui/material"
 
 const moviesUrl = import.meta.env.VITE_API
@@ -119,6 +111,9 @@ const Card = styled.main`
       .table-row{
         display: flex;
         td{
+          @media screen and (min-width: 1600px) and (max-width: 1920px){
+            width: 20%;
+          }
           width: 40%;
         }
         .names{
