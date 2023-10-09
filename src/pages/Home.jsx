@@ -78,7 +78,7 @@ function Home() {
     <>
       <Navbar />
       <Container>
-        <h2 className='title'>Melhores filmes</h2>
+        <h2 className='title'>Melhores filmes (de acordo com o IMDB)</h2>
         <div className="movies-container">
           {topMovies.length > 0 && topMovies.map(movie => <MovieCard movie={movie} key={movie.id} />)}
         </div>
