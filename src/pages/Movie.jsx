@@ -17,6 +17,8 @@ import { Tooltip } from "@mui/material"
 const moviesUrl = import.meta.env.VITE_API
 const apiKey = import.meta.env.VITE_API_KEY
 const imageUrl = import.meta.env.VITE_IMG;
+const imdbApi = import.meta.env.VITE_IMDB_API;
+const imdbApiKey = import.meta.env.VITE_IMDB_API_KEY;
 
 const Container = styled.div`
   color: white;
@@ -145,6 +147,8 @@ const Card = styled.main`
 const Movie = () => {
   const { id } = useParams()
   const [movie, setMovie] = useState(null)
+  const [imdbImages, setImdbImages] = useState(null)
+  const [imdbId, setImdbId] = useState(null)
   const [crew, setCrew] = useState({})
   const [cast, setCast] = useState({})
 
@@ -178,14 +182,23 @@ const Movie = () => {
   }
 
   useEffect(() => {
-  }, [])
-
-  useEffect(() => {
     const movieUrl = `${moviesUrl}${id}?${apiKey}`
     getMovie(movieUrl)
   }, [])
 
-  // vote_average, runtime, popularity
+  useEffect(() => {
+    movie ? setImdbId(movie['imdb_id']) : ''
+    const imdbUrl = `${imdbApi}${imdbApiKey}/${imdbId}`
+    getImdbData(imdbUrl)
+    console.log(imdbUrl)
+    console.log(imdbImages)
+  }, [])
+
+  const getImdbData = async (url) => {
+    const res = await fetch(url)
+    const data = await res.json();
+    setImdbImages(data)
+  }
 
   const dezPrimeirosCast = cast.length > 0 ? cast.slice(0, 18).map(obj => obj) : <></>
 
